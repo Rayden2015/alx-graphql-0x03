@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { useParams, Link } from 'react-router-dom';
-import { GET_CHARACTER_BY_ID } from '../../graphql/queries';
-import './CharacterDetail.css';
+import { GET_CHARACTER_BY_ID } from '@/graphql/queries';
+import '@/styles/CharacterDetail.css';
 
 function CharacterDetail() {
   const { id } = useParams();
@@ -78,7 +78,7 @@ function CharacterDetail() {
           <div className="episodes-section">
             <h3>Episodes</h3>
             <div className="episodes-grid">
-              {character.episode.map((episode) => (
+              {character.episode.map((episode: any) => (
                 <div key={episode.id} className="episode-card">
                   <div className="episode-number">{episode.episode}</div>
                   <div className="episode-info">

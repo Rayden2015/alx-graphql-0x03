@@ -1,7 +1,15 @@
 import { Link } from 'react-router-dom';
-import './Home.css';
+import ErrorProneComponent from '@/components/ErrorProneComponent';
+import '@/styles/Home.css';
 
 function Home() {
+  // Temporarily trigger error to test ErrorBoundary
+  const testError = new URLSearchParams(window.location.search).get('test-error');
+  
+  if (testError) {
+    return <ErrorProneComponent />;
+  }
+  
   return (
     <div className="home-container">
       <div className="hero-section">
@@ -37,6 +45,9 @@ function Home() {
           <a href="https://rickandmortyapi.com/graphql" target="_blank" rel="noopener noreferrer">
             Rick and Morty GraphQL API
           </a>
+        </p>
+        <p className="test-error-link">
+          <Link to="/?test-error=true">Test Error Boundary</Link>
         </p>
       </div>
     </div>

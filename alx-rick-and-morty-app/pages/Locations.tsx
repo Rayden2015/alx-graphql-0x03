@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { useState } from 'react';
-import { GET_LOCATIONS } from '../../graphql/queries';
-import './Locations.css';
+import { GET_LOCATIONS } from '@/graphql/queries';
+import '@/styles/Locations.css';
 
 function Locations() {
   const [page, setPage] = useState(1);
@@ -18,7 +18,7 @@ function Locations() {
     },
   });
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     setPage(1);
   };
@@ -54,7 +54,7 @@ function Locations() {
       ) : (
         <>
           <div className="locations-grid">
-            {data?.locations?.results?.map((location) => (
+            {data?.locations?.results?.map((location: any) => (
               <div key={location.id} className="location-card">
                 <div className="location-icon">🌍</div>
                 <h3>{location.name}</h3>

@@ -1,10 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
-import './Navigation.css';
+import '@/styles/Navigation.css';
 
 function Navigation() {
   const location = useLocation();
 
-  const isActive = (path) => {
+  const isActive = (path: string) => {
     if (path === '/') {
       return location.pathname === '/';
     }

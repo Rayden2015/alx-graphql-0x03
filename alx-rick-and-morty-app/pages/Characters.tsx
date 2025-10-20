@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/client';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { GET_CHARACTERS } from '../../graphql/queries';
-import './Characters.css';
+import { GET_CHARACTERS } from '@/graphql/queries';
+import '@/styles/Characters.css';
 
 function Characters() {
   const [page, setPage] = useState(1);
@@ -19,7 +19,7 @@ function Characters() {
     },
   });
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     setPage(1); // Reset to first page when searching
   };
@@ -61,7 +61,7 @@ function Characters() {
       ) : (
         <>
           <div className="characters-grid">
-            {data?.characters?.results?.map((character) => (
+            {data?.characters?.results?.map((character: any) => (
               <Link
                 to={`/characters/${character.id}`}
                 key={character.id}

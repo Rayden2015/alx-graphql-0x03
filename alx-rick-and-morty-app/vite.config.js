@@ -9,8 +9,10 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './'),
       '@/components': path.resolve(__dirname, './components'),
+      '@/pages': path.resolve(__dirname, './pages'),
       '@/graphql': path.resolve(__dirname, './graphql'),
       '@/interfaces': path.resolve(__dirname, './interfaces/index.ts'),
+      '@/styles': path.resolve(__dirname, './styles'),
     },
   },
 })

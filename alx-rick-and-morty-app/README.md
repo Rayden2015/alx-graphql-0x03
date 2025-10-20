@@ -1,6 +1,6 @@
-# Rick and Morty GraphQL App
+# Rick and Morty GraphQL App with Error Boundary
 
-A React application that uses GraphQL with Apollo Client to explore the Rick and Morty universe.
+A React application that uses GraphQL with Apollo Client to explore the Rick and Morty universe. This project includes an ErrorBoundary component for graceful error handling.
 
 ## 🚀 Features
 
@@ -8,6 +8,7 @@ A React application that uses GraphQL with Apollo Client to explore the Rick and
 - View detailed character information including episodes
 - Explore episodes from all seasons
 - Discover locations across different dimensions
+- **ErrorBoundary** for graceful error handling
 - Fully responsive design
 - Real-time data from Rick and Morty GraphQL API
 
@@ -58,33 +59,37 @@ npm run preview
 
 ```
 alx-rick-and-morty-app/
-├── graphql/
-│   ├── apolloClient.ts      # Apollo Client configuration
-│   └── queries.ts            # GraphQL queries
+├── components/
+│   ├── ErrorBoundary.tsx         # Error boundary component
+│   ├── ErrorProneComponent.tsx   # Test component that throws error
+│   ├── Navigation.tsx            # Navigation bar
+│   └── common/
+│       └── EpisodeCard.tsx       # Episode card component
 ├── pages/
-│   └── _app.tsx              # Next.js app wrapper with Apollo Provider
-├── src/
-│   ├── components/           # React components
-│   │   └── Navigation.jsx    # Navigation bar
-│   ├── pages/                # Page components
-│   │   ├── Home.jsx          # Landing page
-│   │   ├── Characters.jsx    # Characters list
-│   │   ├── CharacterDetail.jsx  # Character details
-│   │   ├── Episodes.jsx      # Episodes list
-│   │   └── Locations.jsx     # Locations list
-│   ├── App.jsx               # Main app component
-│   └── main.jsx              # Entry point
-└── README.md
+│   ├── index.tsx                 # Home page (tests ErrorBoundary)
+│   ├── Characters.tsx            # Characters list page
+│   ├── CharacterDetail.tsx       # Character details page
+│   ├── Episodes.tsx              # Episodes list page
+│   └── Locations.tsx             # Locations list page
+├── graphql/
+│   ├── apolloClient.ts           # Apollo Client configuration
+│   └── queries.ts                # GraphQL queries
+├── styles/                       # CSS files
+├── App.tsx                       # Main app component with routing
+├── main.tsx                      # Entry point
+├── index.html                    # HTML template
+├── vite.config.js                # Vite configuration
+└── README.md                     # This file
 ```
 
 ## 🔧 Technologies
 
 - **React 19** - UI Library
-- **Vite** - Build Tool
-- **Apollo Client 4.0** - GraphQL Client
-- **React Router** - Client-side Routing
+- **Vite 7** - Build Tool
+- **Apollo Client 3.14** - GraphQL Client
+- **React Router 7** - Client-side Routing
 - **GraphQL** - Query Language
-- **TypeScript** - Type Safety (for GraphQL files)
+- **TypeScript** - Type Safety
 
 ## 🌐 API
 
@@ -98,41 +103,49 @@ The app includes queries for:
 - `GET_EPISODES` - Fetch episodes with pagination
 - `GET_LOCATIONS` - Fetch locations with pagination and filters
 
+## 🛡️ Error Boundary Implementation
+
+This project includes an **ErrorBoundary** component that catches JavaScript errors in the component tree and displays a fallback UI.
+
+### Files:
+1. **components/ErrorBoundary.tsx** - React Error Boundary class component
+2. **components/ErrorProneComponent.tsx** - Test component that intentionally throws an error
+3. **pages/index.tsx** - Home page that uses ErrorBoundary to catch errors
+
+### Testing the Error Boundary:
+
+When you run `npm run dev` and visit `http://localhost:5173` (or the port shown in your terminal), the ErrorBoundary will catch the error thrown by `ErrorProneComponent` and display:
+
+```
+🔴 ERROR BOUNDARY ACTIVATED! 🔴
+Oops, there is an error!
+The Error Boundary successfully caught the error!
+[Try again? button]
+```
+
+The error will also be logged to the browser console.
+
 ## 🎨 Pages
 
-1. **Home** (`/`) - Landing page with navigation cards
+1. **Home** (`/`) - Demonstrates ErrorBoundary functionality
 2. **Characters** (`/characters`) - Browse and search characters with filters
-3. **Character Detail** (`/characters/:id`) - View full character information, origin, location, and episodes
+3. **Character Detail** (`/characters/:id`) - View full character information
 4. **Episodes** (`/episodes`) - Browse all episodes with search
 5. **Locations** (`/locations`) - Explore locations with search and filters
 
-## 🎯 Features by Page
+## 🎯 How Error Boundary Works
 
-### Characters
-- Search by name
-- Filter by status (Alive, Dead, Unknown)
-- Pagination
-- Character cards with images and status indicators
-- Click to view details
+The `ErrorBoundary` component wraps the entire application in `App.tsx`:
 
-### Character Detail
-- Full character profile with image
-- Status indicator
-- Origin and location information
-- Complete list of episodes featuring the character
-- Episode air dates
+```typescript
+<ErrorBoundary>
+  <Router>
+    {/* Routes */}
+  </Router>
+</ErrorBoundary>
+```
 
-### Episodes
-- Search by episode name
-- Episode number display
-- Air date information
-- Pagination
-
-### Locations
-- Search by name
-- Filter by type
-- Dimension information
-- Pagination
+Any error thrown by child components will be caught and handled gracefully, preventing the entire app from crashing.
 
 ## 🚨 Important Note
 
@@ -147,22 +160,35 @@ If you see an error like "You are using Node.js 18.x.x. Vite requires Node.js ve
 nvm install
 nvm use
 
-# Or install a specific version
-nvm install 20.19.0
-nvm use 20.19.0
-
 # Then reinstall dependencies and run the dev server
 npm install
 npm run dev
 ```
 
-## 📄 Required Files
+## 🏃 Running the Application
 
-Per the ALX GraphQL curriculum, this project includes:
-- `README.md` - This file
-- `graphql/apolloClient.ts` - Apollo Client setup
-- `graphql/queries.ts` - GraphQL queries
-- `pages/_app.tsx` - App wrapper with Apollo Provider
+```bash
+# Navigate to the project directory
+cd alx-rick-and-morty-app
+
+# Use the correct Node version
+nvm use
+
+# Start the development server
+npm run dev
+```
+
+The application will be available at `http://localhost:5173` (or another port if 5173 is in use).
+
+## 📂 Repository Information
+
+- **GitHub repository:** alx-graphql-0x03
+- **Directory:** alx-rick-and-morty-app
+- **Key Files:** 
+  - `README.md`
+  - `components/ErrorBoundary.tsx`
+  - `components/ErrorProneComponent.tsx`
+  - `pages/index.tsx`
 
 ## 📄 License
 

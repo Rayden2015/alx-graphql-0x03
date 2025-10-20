@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { useState } from 'react';
-import { GET_EPISODES } from '../../graphql/queries';
-import './Episodes.css';
+import { GET_EPISODES } from '@/graphql/queries';
+import '@/styles/Episodes.css';
 
 function Episodes() {
   const [page, setPage] = useState(1);
@@ -16,7 +16,7 @@ function Episodes() {
     },
   });
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     setPage(1);
   };
@@ -45,7 +45,7 @@ function Episodes() {
       ) : (
         <>
           <div className="episodes-grid">
-            {data?.episodes?.results?.map((episode) => (
+            {data?.episodes?.results?.map((episode: any) => (
               <div key={episode.id} className="episode-card">
                 <div className="episode-header">
                   <span className="episode-number">{episode.episode}</span>
